@@ -1,3 +1,5 @@
+@charset "UTF-8";
+
 /* ベースリセット */
 * {
   box-sizing: border-box;
@@ -9,22 +11,22 @@ body {
   background-color: #111;
   font-family: sans-serif;
   display: flex;
-  justify-content: center; /* PCブラウザで見た時に中央寄せ */
+  justify-content: center;
   align-items: center;
   height: 100vh;
+  overflow: hidden; /* 画面全体の予期せぬスクロールを防止 */
 }
 
 /* ゲーム画面コンテナ（スマホ縦画面サイズ） */
 #game-container {
   width: 100vw;
-  max-width: 480px; /* スマホの最大幅に合わせて制限 */
+  max-width: 480px;
   height: 100vh;
   max-height: 900px;
-  background: linear-gradient(to bottom, #4a6b8c, #2c3e50); /* 背景の仮グラデーション */
+  background: linear-gradient(to bottom, #4a6b8c, #2c3e50);
   display: flex;
   flex-direction: column;
   position: relative;
-  overflow: hidden;
   box-shadow: 0 0 20px rgba(0,0,0,0.8);
 }
 
@@ -36,11 +38,12 @@ body {
   color: white;
   font-weight: bold;
   text-shadow: 1px 1px 2px black;
+  z-index: 10;
 }
 
 /* エネミーエリア */
 #enemy-area {
-  flex: 1; /* 残りの余白を埋める */
+  flex: 1;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -50,7 +53,7 @@ body {
 .enemy .sprite {
   width: 120px;
   height: 120px;
-  background-color: #ff4757; /* 敵の仮カラー（赤） */
+  background-color: #ff4757;
   border-radius: 10px;
   display: flex;
   justify-content: center;
@@ -62,7 +65,7 @@ body {
 
 /* プレイヤーエリア */
 #player-area {
-  height: 50%; /* 画面の下半分をプレイヤー領域に */
+  height: 50%;
   padding: 10px;
   display: flex;
   align-items: flex-end;
@@ -73,8 +76,8 @@ body {
   width: 100%;
   height: 100%;
   display: grid;
-  grid-template-columns: 1fr 1fr; /* 2列（前衛・後衛） */
-  grid-template-rows: repeat(3, 1fr); /* 3行 */
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: repeat(3, 1fr);
   gap: 10px;
 }
 
@@ -85,15 +88,15 @@ body {
   justify-content: flex-end;
   align-items: center;
   position: relative;
-  /* タップイベント時のハイライト用 */
   cursor: pointer;
   user-select: none;
+  touch-action: manipulation; /* スマホ・タブレットでの連続タップ時のズームを防止 */
 }
 
 .unit .sprite {
   width: 70px;
   height: 70px;
-  background-color: #1e90ff; /* 味方の仮カラー（青） */
+  background-color: #1e90ff;
   border-radius: 5px;
   display: flex;
   justify-content: center;
@@ -106,7 +109,7 @@ body {
 }
 
 .unit.guest .sprite {
-  background-color: #ffa502; /* ゲストの仮カラー（オレンジ） */
+  background-color: #ffa502;
 }
 
 /* ゲージコンテナ（HPとBB） */
@@ -129,11 +132,11 @@ body {
 /* ゲージの中身 */
 .fill {
   height: 100%;
-  transition: width 0.3s ease-out; /* ダメージを受けた時のアニメーション */
+  transition: width 0.3s ease-out; /* ダメージ増減時のアニメーション */
 }
 
-.hp-bar { background-color: #2ed573; } /* HPは緑 */
-.bb-bar { background-color: #eccc68; } /* BBゲージは黄色 */
+.hp-bar { background-color: #2ed573; }
+.bb-bar { background-color: #eccc68; }
 
 /* フッター */
 #battle-footer {
@@ -141,6 +144,7 @@ body {
   display: flex;
   justify-content: space-between;
   background-color: rgba(0, 0, 0, 0.5);
+  z-index: 10;
 }
 
 button {
@@ -153,4 +157,3 @@ button {
 
 .item-btn { background-color: #7bed9f; color: #2f3542; }
 .auto-btn { background-color: #dfe4ea; color: #2f3542; }
-
